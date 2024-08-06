@@ -22,19 +22,22 @@ namespace _05
         class Printer
         {
             public void Print(string value)
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
+            {                
                 Console.WriteLine(value);
             }
         }
 
 
+
+
         class ColorPrinter : Printer
         {
-            public void Print(string value)
+            public ConsoleColor color = ConsoleColor.Green;
+            public new void Print(string value)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(value);
+                Console.ForegroundColor = color;
+                base.Print(value);
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
 
@@ -46,17 +49,13 @@ namespace _05
 
             Printer printer = new Printer();
             printer.Print("базовий принтер");
-
             Console.WriteLine(new string('-', 30));
 
             ColorPrinter colorPrinter = new ColorPrinter();
             colorPrinter.Print("кольоровий принтер");
-
             Console.WriteLine(new string('-', 30));
 
-            (colorPrinter as Printer).Print("кольоровий принтер може друкувати як базовий");
-
-
+            (colorPrinter as Printer).Print("--данні--");
 
             Console.ReadKey();
         }

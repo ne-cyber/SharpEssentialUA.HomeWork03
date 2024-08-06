@@ -31,7 +31,7 @@ namespace _04
 
 
 
-        class  DocumentWorker
+        class DocumentWorker
         {
             public virtual void OpenDocument()
             {
@@ -71,35 +71,37 @@ namespace _04
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            string key;
-            Console.Write("Ведіть ключ продукту: ");
-            key = Console.ReadLine();
-            
+            Console.InputEncoding = Encoding.UTF8;
 
-            DocumentWorker documentWorker;
-
-            switch(key)
+            while (true)
             {
-                default:
-                    documentWorker = new DocumentWorker();
-                    break;
+                string key;
+                Console.Write("Ведіть ключ продукту: ");
+                key = Console.ReadLine();
 
-                case "pro":
-                    ProDocumentWorker proDocumentWorker = new ProDocumentWorker();
-                    documentWorker = (DocumentWorker)proDocumentWorker;
-                    break;
+                DocumentWorker documentWorker;
 
-                case "exp":
-                    ExpertDocumentWorker expertDocumentWorker = new ExpertDocumentWorker();
-                    documentWorker = (DocumentWorker)expertDocumentWorker;
-                    break;
+                switch (key)
+                {
+                    default:
+                        documentWorker = new DocumentWorker();
+                        break;
+
+                    case "pro":
+                        documentWorker = new ProDocumentWorker();
+                        break;
+
+                    case "exp":
+                        documentWorker = new ExpertDocumentWorker();
+                        break;
+                }
+
+                documentWorker.OpenDocument();
+                documentWorker.EditDocument();
+                documentWorker.SaveDocument();
+
+                Console.WriteLine(new string('-', 30));
             }
-
-            documentWorker.OpenDocument();
-            documentWorker.EditDocument();
-            documentWorker.SaveDocument();
-
-            Console.ReadKey();
         }
     }
 }

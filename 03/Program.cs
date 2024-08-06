@@ -37,7 +37,7 @@ namespace _03
 
 
 
-            public Vehicle(int x, int y, double price, double speed, int productionYear)
+            protected Vehicle(int x, int y, double price, double speed, int productionYear)
             {
                 this.x = x;
                 this.y = y;
@@ -57,7 +57,7 @@ namespace _03
             {
                 Console.Write("Літак ");
                 base.PrintInfo();
-                Console.Write($"висота польоту літака {altitude}, кількість пасажирів літака {numberOfPassengers}");
+                Console.WriteLine($"висота польоту літака {altitude}, кількість пасажирів літака {numberOfPassengers}");
             }
 
 
@@ -82,6 +82,7 @@ namespace _03
             {
                 Console.Write("Машина ");
                 base.PrintInfo();
+                Console.WriteLine();
             }
         }
 
@@ -94,7 +95,7 @@ namespace _03
             {
                 Console.Write("Корабель ");
                 base.PrintInfo();
-                Console.Write($"кількість пасажирів судна {numberOfPassengers}, порт приписки судна {homePort}");
+                Console.WriteLine($"кількість пасажирів судна {numberOfPassengers}, порт приписки судна {homePort}");
             }
 
 
@@ -112,28 +113,19 @@ namespace _03
 
         static void Main(string[] args)
         {
+
             Console.OutputEncoding = Encoding.UTF8;
 
             Car car = new Car(1, 1, 1000, 0.3, 1999);
-            car.PrintInfo();
-            Console.WriteLine();
-
             Plane plane = new Plane(10, 10, 100_000, 100, 2023, 10_000, 273);
-            plane.PrintInfo();
-            Console.WriteLine();
-
             Ship ship = new Ship(200, 200, 2_000_000, 30, 2022, 980, "Одеса");
-            ship.PrintInfo();
-            Console.WriteLine();
 
-
-            Console.WriteLine(new string('-', 60));
 
             Vehicle[] vehicle = new Vehicle[3] { car, plane, ship};
             foreach (Vehicle v in vehicle)
             {
                 v.PrintInfo();
-                Console.WriteLine();
+                Console.WriteLine(new string('-', 30));
             }
 
             Console.ReadKey();

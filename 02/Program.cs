@@ -23,6 +23,7 @@ namespace _02
 
         class Pupil
         {
+            protected Pupil() { }
             public virtual void Study()
             {
                 Console.WriteLine("Учень вчиться");
@@ -60,7 +61,7 @@ namespace _02
             }
             public override void Relax()
             {
-                Console.WriteLine("Учень відпочиває мало :)");
+                Console.WriteLine("Учень відпочиває мало!");
             }
         }
         class GoodPupil : Pupil
@@ -98,7 +99,7 @@ namespace _02
             }
             public override void Relax()
             {
-                Console.WriteLine("Учень постійно відпочиває!");
+                Console.WriteLine("Учень постійно відпочиває :(");
             }
         }
 
@@ -114,43 +115,50 @@ namespace _02
             }
 
             public ClassRoom(Pupil p1, Pupil p2, Pupil p3)
+                :this(p1, p2, p3, null)
             {
-                pupiles = new Pupil[3] { p1, p2, p3 };
+                Array.Resize(ref pupiles, 3);
             }
 
             public ClassRoom(Pupil p1, Pupil p2)
+                :this(p1, p2, null, null)
             {
-                pupiles = new Pupil[2] { p1, p2 };
+                Array.Resize(ref pupiles, 2);
             }
 
 
 
-            public void ClassRoomStudy()
+            public void Study()
             {
+                Console.WriteLine("---Клас вчиться---");
                 foreach (Pupil p in pupiles)
                 {
                     p.Study();
                 }
             }
 
-            public void ClassRoomRead()
+            public void Read()
             {
+                Console.WriteLine("---Клас читає---");
                 foreach (Pupil p in pupiles)
                 {
                     p.Read();
                 }
             }
 
-            public void ClassRoomWrite()
+            public void Write()
             {
+                Console.WriteLine("---Клас пише---");
+
                 foreach (Pupil p in pupiles)
                 {
                     p.Write();
                 }
             }
 
-            public void ClassRoomRelax()
+            public void Relax()
             {
+                Console.WriteLine("---Клас відпочиває---");
                 foreach (Pupil p in pupiles)
                 {
                     p.Relax();
@@ -165,22 +173,20 @@ namespace _02
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
+            Console.InputEncoding = Encoding.UTF8;
 
 
-            ClassRoom classRoom = new ClassRoom(new ExelentPupil(), new GoodPupil(), new BadPupil());
-            classRoom.ClassRoomStudy();
-
+            ClassRoom classRoom = new ClassRoom(new ExelentPupil(), new ExelentPupil(), new BadPupil());
+            classRoom.Study();
             Console.WriteLine(new string('-', 30));
 
-            classRoom.ClassRoomRead();
-
+            classRoom.Read();
             Console.WriteLine(new string('-', 30));
 
-            classRoom.ClassRoomWrite();
-
+            classRoom.Write();
             Console.WriteLine(new string('-', 30));
 
-            classRoom.ClassRoomRelax();
+            classRoom.Relax();
 
             Console.ReadKey();
         }
